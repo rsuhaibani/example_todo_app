@@ -1,14 +1,8 @@
 import sqlite3
-from bottle import route, template, request, static_file
+from bottle import route, template, request, static_file, run
 
-host = "pythonanywhere"
-
-if host == "pythonanywhere":
-    from bottle import default_app
-    site_path = "/home/drdelozier/mysite/"
-else:
-    from bottle import run
-    site_path = "/home/greg/mysite/"
+from bottle import run
+site_path = "/root/app/"
 
 database_file = site_path + "todo.db"
 static_folder = site_path + "static"
@@ -103,5 +97,4 @@ def post_delete_task():
 def server_static(filename):
         return static_file(filename, root=static_folder)
 
-#run()... #if localhost
-application = default_app() #if pythonanywhere
+run(host='0.0.0.0',port=80)
